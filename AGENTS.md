@@ -1,6 +1,6 @@
 # Doce Maria Pricing — Development Contract
 
-Updated on 2026-09-18. Read this contract before working in any of the three projects.
+Updated on 2026-09-23. Read this contract before working in any of the three projects.
 Keep its copies synchronized when the owner approves a new decision. The current decisions
 below supersede earlier exploratory proposals in the conversation.
 
@@ -72,6 +72,12 @@ below supersede earlier exploratory proposals in the conversation.
 - The owner explicitly approved **local public-key signature validation** in Pricing.
   The API verifies expiry, token type, issuer, and audience offline. Trusted issuer/public-key
   configuration allows a future Manager identity provider without coupling pricing code to it.
+- On 2026-09-23 the owner approved removing the legacy HS256 trust bridge. All providers
+  must use RS256 with required sub, iss, aud, exp, iat and type=access. No shared-secret,
+  inferred issuer or audience-bypass fallback is permitted.
+- Preserve the exact issuer/subject identifiers during provider migration to retain data
+  ownership. Migrate external issuers before publishing the strict API; their repositories
+  remain outside the authorized modification scope. Apps sharing issuer+subject share data.
 - Use signed RS256 access tokens; private keys stay in Auth. Only public keys are distributed
   to resource APIs. Never commit keys, tokens, passwords, or local .env files.
 - Scope data ownership by both issuer and subject so identities from different providers
